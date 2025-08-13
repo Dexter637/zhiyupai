@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# Virtual Environment
+venv/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*.
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Model files
+/models/*.pkl
+
+# Batch files
+*.bat
+
+# Vercel
+.vercel/
+
+# CSV and image outputs from scripts
+*.csv
+*.png
