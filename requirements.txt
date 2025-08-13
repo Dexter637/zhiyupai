@@ -10,6 +10,7 @@ pymongo>=4.3.3
 # 数据处理
 numpy>=1.24.0
 pandas>=2.0.0
+wfdb>=4.1.0  # 用于心电图数据处理
 
 # 工具库
 python-dateutil>=2.8.2
@@ -21,3 +22,7 @@ whitenoise>=6.4.0
 
 # 机器学习模型
 glightgbm>=3.3.5
+pyod>=1.1.0  # 异常检测库
+scikit-learn>=1.2.0  # 机器学习基础库
+matplotlib>=3.7.0  # 数据可视化
+seaborn>=0.12.2  # 高级数据可视化
