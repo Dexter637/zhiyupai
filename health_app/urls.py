@@ -1,5 +1,5 @@
 from django.urls import path
-from . import views
+from . import views, sleep_views
 
 app_name = 'health_app'
 
@@ -21,4 +21,10 @@ urlpatterns = [
     path('wearable-data/upload/', views.wearable_data_upload, name='wearable_data_upload'),
     path('wearable-data/<str:user_id>/', views.get_user_wearable_data, name='get_user_wearable_data'),
     path('wearable-data/summary/<str:user_id>/<str:data_type>/', views.get_data_summary, name='get_data_summary'),
+    
+    # 睡眠分析页面和API
+    path('sleep-analysis/', sleep_views.sleep_analysis_view, name='sleep_analysis'),
+    path('sleep-data/', sleep_views.get_sleep_data_api, name='get_sleep_data_api'),
+    path('api/sleep-data/', sleep_views.get_sleep_data_api, name='get_sleep_data_api_alt'),
+    path('api/sleep_data/', sleep_views.get_sleep_data_api, name='get_sleep_data_api_alt_underscore'),
 ]
