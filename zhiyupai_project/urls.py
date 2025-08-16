@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import JsonResponse
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
@@ -24,6 +25,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('sleep_analysis/', TemplateView.as_view(template_name='sleep_analysis.html'), name='sleep_analysis'),
     path('admin/', admin.site.urls),
     
     # JWT认证路由
@@ -37,6 +39,19 @@ urlpatterns = [
     
     # REST Framework浏览器API
     path('api-auth/', include('rest_framework.urls')),
+    
+    # 临时测试API，绕过认证
+    path('test/sleep_data/', lambda request: JsonResponse({
+        "status": "success",
+        "count": 5,
+        "data": [
+            {"_id": "1", "user_id": "admin", "data_type": "sleep", "timestamp": "2025-08-15T23:00:00", "values": {"sleep_start_time": "2025-08-15T23:30:00", "sleep_end_time": "2025-08-16T06:45:00", "total_sleep_mins": 435, "deep_sleep_mins": 135, "sleep_quality": 85}},
+            {"_id": "2", "user_id": "admin", "data_type": "sleep", "timestamp": "2025-08-14T23:00:00", "values": {"sleep_start_time": "2025-08-14T22:15:00", "sleep_end_time": "2025-08-15T06:30:00", "total_sleep_mins": 495, "deep_sleep_mins": 165, "sleep_quality": 90}},
+            {"_id": "3", "user_id": "admin", "data_type": "sleep", "timestamp": "2025-08-13T23:00:00", "values": {"sleep_start_time": "2025-08-13T00:15:00", "sleep_end_time": "2025-08-13T06:00:00", "total_sleep_mins": 345, "deep_sleep_mins": 90, "sleep_quality": 70, "is_night_owl": True}},
+            {"_id": "4", "user_id": "admin", "data_type": "sleep", "timestamp": "2025-08-12T23:00:00", "values": {"sleep_start_time": "2025-08-12T22:45:00", "sleep_end_time": "2025-08-13T06:15:00", "total_sleep_mins": 450, "deep_sleep_mins": 150, "sleep_quality": 88}},
+            {"_id": "5", "user_id": "admin", "data_type": "sleep", "timestamp": "2025-08-11T23:00:00", "values": {"sleep_start_time": "2025-08-12T00:30:00", "sleep_end_time": "2025-08-12T06:45:00", "total_sleep_mins": 375, "deep_sleep_mins": 105, "sleep_quality": 75, "is_night_owl": True}}
+        ]
+    }), name='test_sleep_data')
 ]
 
 # 在开发环境中提供媒体文件服务

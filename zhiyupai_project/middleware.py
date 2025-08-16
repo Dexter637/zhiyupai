@@ -14,6 +14,7 @@ class SecurityMiddleware:
             r'^/api/auth/',  # 认证相关的URL
             r'^/api/users/register/$',  # 注册URL
             r'^/api/users/login/$',  # 登录URL
+            r'^/api/token/',  # JWT认证URL
             r'^/admin/',  # 管理后台URL
             r'^/api-auth/',  # DRF认证URL
             r'^/api/wearable/upload/$',  # 可穿戴设备数据上传URL

@@ -334,18 +334,25 @@ def generate_sample_data():
     # 生成睡眠数据
     for user_id in user_ids:
         for i in range(7):  # 一周的睡眠数据
-            timestamp = now - timedelta(days=i, hours=8)  # 假设早上8点记录昨晚的睡眠
+            # 假设早上8点记录昨晚的睡眠
+            record_time = now - timedelta(days=i, hours=8)
             
             total_sleep = np.random.normal(420, 60)  # 平均7小时 (420分钟)
             deep_sleep = total_sleep * np.random.uniform(0.15, 0.3)  # 深睡眠占15-30%
             rem_sleep = total_sleep * np.random.uniform(0.2, 0.25)  # REM睡眠占20-25%
             light_sleep = total_sleep - deep_sleep - rem_sleep
             
+            # 计算睡眠开始和结束时间
+            sleep_end_time = record_time  # 记录时间接近醒来时间
+            sleep_start_time = sleep_end_time - timedelta(minutes=total_sleep)  # 开始时间 = 结束时间 - 总睡眠时长
+            
             data = {
                 "user_id": user_id,
                 "device_id": np.random.choice(device_ids),
                 "data_type": "sleep",
-                "timestamp": timestamp,
+                "timestamp": record_time,
+                "sleep_start_time": sleep_start_time,  # 添加开始睡眠时间
+                "sleep_end_time": sleep_end_time,      # 添加睡眠结束时间
                 "values": {
                     "total_sleep_mins": total_sleep,
                     "deep_sleep_mins": deep_sleep,

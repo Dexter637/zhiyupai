@@ -3,223 +3,1024 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>智愈派 - 健康管理平台</title>
+    <title>治愈派 - 健康管理平台</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
+        /* 全局样式重置 */
+        * {
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+        
+        /* 登录页面样式 */
+        .login-body {
+            background-color: #f5f7fa; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
         }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-            border-radius: 5px;
-            margin-bottom: 2rem;
+        
+        .login-container {
+            background-color: white; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); 
+            width: 100%; 
+            max-width: 400px; 
+            overflow: hidden; 
+            transition: all 0.3s ease;
         }
-        h1 {
-            margin: 0;
+        
+        .brand-logo {
+            text-align: center; 
+            padding: 30px 0; 
+            background-color: white; 
+            border-bottom: 1px solid #f0f0f0;
         }
-        .intro {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        
+        .brand-logo h1 {
+            font-size: 28px; 
+            font-weight: 700; 
+            color: #333; 
+            margin-bottom: 5px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
         }
-        .api-links {
-            margin-top: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
+        
+        .brand-logo h1 span {
+            color: #3498db; 
+            margin-right: 8px;
         }
-        .api-link {
-            background-color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            flex: 1 1 300px;
+        
+        .form-container {
+            padding: 30px;
         }
-        a {
-            color: #4CAF50;
-            text-decoration: none;
+        
+        .form-title {
+            text-align: center; 
+            margin-bottom: 25px; 
+            font-size: 20px; 
+            color: #555;
         }
-        a:hover {
+        
+        .input-group {
+            margin-bottom: 20px; 
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block; 
+            margin-bottom: 8px; 
+            font-size: 14px; 
+            color: #666;
+        }
+        
+        .input-group input {
+            width: 100%; 
+            padding: 12px 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none; 
+            border-color: #3498db; 
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        
+        .btn {
+            width: 100%; 
+            padding: 12px; 
+            background-color: #3498db; 
+            color: white; 
+            border: none; 
+            border-radius: 6px; 
+            font-size: 16px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .helper-links {
+            display: flex; 
+            justify-content: space-between; 
+            margin-top: 15px; 
+            font-size: 14px;
+        }
+        
+        .helper-links a {
+            color: #3498db; 
+            text-decoration: none; 
+            transition: color 0.3s;
+        }
+        
+        .helper-links a:hover {
+            color: #2980b9; 
             text-decoration: underline;
         }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>智愈派 - 健康管理平台</h1>
-        </header>
-        <div class="intro">
-            <h2>欢迎使用智愈派API</h2>
-            <p>这是一个健康数据管理平台的API服务。您可以通过以下链接访问API文档和测试接口。</p>
-        </div>
-        <div class="api-links">
-            <div class="api-link">
-                <h3>API文档</h3>
-                <p>查看完整的API文档和使用说明。</p>
-                <a href="/api-auth/" target="_blank">访问API文档</a>
-            </div>
-            <div class="api-link">
-                <h3>健康数据API</h3>
-                <p>访问健康数据相关的API接口。</p>
-                <a href="/api/health/" target="_blank">查看健康数据API</a>
-            </div>
-            <div class="api-link">
-                <h3>用户管理API</h3>
-                <p>访问用户管理相关的API接口。</p>
-                <a href="/api/users/" target="_blank">查看用户管理API</a>
-            </div>
-        </div>
-
-        <div class="intro" style="margin-top: 2rem;">
-            <h2>用户注册</h2>
-            <form id="registerForm">
-                <div style="margin-bottom: 1rem;">
-                    <label for="username" style="display: block; margin-bottom: 0.5rem;">用户名（仅允许英文和数字）:</label>
-                    <input type="text" id="username" name="username" required
-                        style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <label for="password" style="display: block; margin-bottom: 0.5rem;">密码（不允许中文，只允许字母、数字和.符号）:</label>
-                    <input type="password" id="password" name="password" required
-                        style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
-                <button type="submit" style="background-color: #4CAF50; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">
-                    注册
-                </button>
-            </form>
-            <div id="registerResult" style="margin-top: 1rem; padding: 1rem; border-radius: 4px;"></div>
-        </div>
-
-        <div class="intro" style="margin-top: 2rem;">
-            <h2>用户登录</h2>
-            <form id="loginForm">
-                <div style="margin-bottom: 1rem;">
-                    <label for="loginUsername" style="display: block; margin-bottom: 0.5rem;">用户名:</label>
-                    <input type="text" id="loginUsername" name="username" required
-                        style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <label for="loginPassword" style="display: block; margin-bottom: 0.5rem;">密码:</label>
-                    <input type="password" id="loginPassword" name="password" required
-                        style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                </div>
-                <button type="submit" style="background-color: #2196F3; color: white; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer;">
-                    登录
-                </button>
-            </form>
-            <div id="loginResult" style="margin-top: 1rem; padding: 1rem; border-radius: 4px;"></div>
-        </div>
-
-        <script>
-            // 处理注册表单
-            document.getElementById('registerForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const resultDiv = document.getElementById('registerResult');
-                resultDiv.style.display = 'block';
-                resultDiv.style.backgroundColor = '#f0f0f0';
-                resultDiv.textContent = '正在注册...';
-
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-
-                try {
-                    const response = await fetch('/api/users/register/', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ username, password }),
-                      });
-
-                    const data = await response.json();
-
-                    if (response.ok) {
-                        resultDiv.style.backgroundColor = '#dff0d8';
-                        resultDiv.style.color = '#3c763d';
-                        resultDiv.innerHTML = `注册成功！<br>用户ID: ${data.user_id}<br>访问令牌: ${data.tokens.access.substring(0, 20)}...`;
-                        // 清空表单
-                        document.getElementById('registerForm').reset();
-                    } else {
-                        resultDiv.style.backgroundColor = '#f2dede';
-                        resultDiv.style.color = '#a94442';
-                        resultDiv.textContent = `注册失败: ${data.error || '未知错误'}`;
-                    }
-                } catch (error) {
-                    resultDiv.style.backgroundColor = '#f2dede';
-                    resultDiv.style.color = '#a94442';
-                    resultDiv.textContent = `请求出错: ${error.message}`;
-                }
-            });
-
-            // 处理登录表单
-            document.getElementById('loginForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const resultDiv = document.getElementById('loginResult');
-                resultDiv.style.display = 'block';
-                resultDiv.style.backgroundColor = '#f0f0f0';
-                resultDiv.textContent = '正在登录...';
-
-                const username = document.getElementById('loginUsername').value;
-                const password = document.getElementById('loginPassword').value;
-
-                try {
-                    function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        
+        .form-toggle {
+            text-align: center; 
+            margin-top: 20px; 
+            font-size: 14px; 
+            color: #666;
+        }
+        
+        .form-toggle a {
+            color: #3498db; 
+            font-weight: 600; 
+            text-decoration: none;
+        }
+        
+        .form-toggle a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: #e74c3c; 
+            font-size: 14px; 
+            margin-top: 5px; 
+            display: none;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                width: 90%;
+            }
+            
+            .brand-logo {
+                padding: 20px 0;
+            }
+            
+            .form-container {
+                padding: 20px;
             }
         }
-    }
-    return cookieValue;
-}
+        
+        /* 仪表盘样式 */
+        .dashboard-body {
+            display: flex; 
+            height: 100vh; 
+            background-color: #f5f7fa; 
+            display: none;
+        }
+        
+        /* 侧边栏 */
+        .sidebar {
+            width: 250px; 
+            background-color: white; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            padding: 20px 0; 
+            display: flex; 
+            flex-direction: column;
+        }
+        
+        .sidebar-header {
+            padding: 0 20px 20px; 
+            border-bottom: 1px solid #f0f0f0; 
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 22px; 
+            color: #333; 
+            display: flex; 
+            align-items: center;
+        }
+        
+        .sidebar-header h2 span {
+            color: #3498db; 
+            margin-right: 8px;
+        }
+        
+        .sidebar-menu {
+            list-style: none; 
+            flex-grow: 1;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+        
+        .sidebar-menu a {
+            display: flex; 
+            align-items: center; 
+            padding: 12px 20px; 
+            color: #666; 
+            text-decoration: none; 
+            transition: all 0.3s; 
+            border-left: 3px solid transparent;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: #f5f7fa; 
+            color: #3498db; 
+            border-left-color: #3498db;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 12px; 
+            font-size: 18px;
+        }
+        
+        .sidebar-footer {
+            padding: 20px; 
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .user-profile {
+            display: flex; 
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background-color: #e0e0e0; 
+            margin-right: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: #666; 
+            font-weight: bold;
+        }
+        
+        .user-info {
+            flex-grow: 1;
+        }
+        
+        .user-name {
+            font-size: 14px; 
+            font-weight: 600; 
+            color: #333;
+        }
+        
+        .user-role {
+            font-size: 12px; 
+            color: #999;
+        }
+        
+        .logout-btn {
+            background: none; 
+            border: none; 
+            color: #e74c3c; 
+            cursor: pointer; 
+            font-size: 16px;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            flex-grow: 1; 
+            padding: 20px; 
+            overflow-y: auto;
+        }
+        
+        .header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+            padding-bottom: 15px; 
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .page-title {
+            font-size: 24px; 
+            color: #333;
+        }
+        
+        .search-bar {
+            display: flex; 
+            align-items: center; 
+            background-color: white; 
+            border-radius: 20px; 
+            padding: 8px 15px; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
+            width: 300px;
+        }
+        
+        .search-bar input {
+            border: none; 
+            outline: none; 
+            flex-grow: 1; 
+            padding: 5px; 
+            font-size: 14px;
+        }
+        
+        .search-bar button {
+            background: none; 
+            border: none; 
+            color: #999; 
+            cursor: pointer;
+        }
+        
+        /* 健康指标卡片 */
+        .health-cards {
+            display: flex; 
+            gap: 20px; 
+            margin-bottom: 30px; 
+            flex-wrap: wrap;
+        }
+        
+        .health-card {
+            background-color: white; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+            padding: 20px; 
+            flex: 1; 
+            min-width: 200px;
+        }
+        
+        .card-header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 15px;
+        }
+        
+        .card-title {
+            font-size: 16px; 
+            color: #666;
+        }
+        
+        .card-value {
+            font-size: 28px; 
+            font-weight: 700; 
+            color: #333; 
+            margin-bottom: 5px;
+        }
+        
+        .card-extra {
+            font-size: 14px; 
+            color: #999; 
+            display: flex; 
+            align-items: center;
+        }
+        
+        .card-extra .trend {
+            display: flex; 
+            align-items: center; 
+            margin-left: 5px;
+        }
+        
+        .trend.up {
+            color: #2ecc71;
+        }
+        
+        .trend.down {
+            color: #e74c3c;
+        }
+        
+        /* 图表容器 */
+        .chart-container {
+            background-color: white; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+            padding: 20px; 
+            margin-bottom: 30px;
+        }
+        
+        .chart-header {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px;
+        }
+        
+        .chart-title {
+            font-size: 18px; 
+            color: #333; 
+            font-weight: 600;
+        }
+        
+        .chart-period {
+            display: flex; 
+            gap: 10px;
+        }
+        
+        .period-btn {
+            padding: 5px 12px; 
+            border: 1px solid #e0e0e0; 
+            border-radius: 20px; 
+            background-color: transparent; 
+            color: #666; 
+            font-size: 14px; 
+            cursor: pointer; 
+            transition: all 0.3s;
+        }
+        
+        .period-btn.active {
+            background-color: #3498db; 
+            color: white; 
+            border-color: #3498db;
+        }
+        
+        .chart {
+            height: 300px; 
+            position: relative;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 200px;
+            }
+            
+            .search-bar {
+                width: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%; 
+                height: auto; 
+                flex-direction: row; 
+                padding: 10px 20px;
+            }
+            
+            .sidebar-header {
+                padding: 0; 
+                border-bottom: none; 
+                margin-bottom: 0;
+            }
+            
+            .sidebar-menu {
+                display: flex; 
+                margin-left: 20px;
+            }
+            
+            .sidebar-menu li {
+                margin-bottom: 0; 
+                margin-right: 10px;
+            }
+            
+            .sidebar-menu a {
+                padding: 8px 12px; 
+                border-left: none; 
+                border-radius: 6px;
+            }
+            
+            .sidebar-footer {
+                display: none;
+            }
+            
+            .health-cards {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <!-- 使用更稳定的CDN链接 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+</head>
+<body class="login-body" id="body">
+    <!-- 登录容器 -->
+    <div class="login-container" id="login-container">
+        <div class="brand-logo">
+            <h1><span>治愈派</span> 健康管理平台</h1>
+        </div>
+        
+        <!-- 登录表单 -->
+        <div id="login-form" class="form-container">
+            <h2 class="form-title">账号登录</h2>
+            
+            <div class="input-group">
+                <label for="login-username">用户名</label>
+                <input type="text" id="login-username" placeholder="请输入用户名">
+                <div class="error-message" id="login-username-error">请输入用户名</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="login-password">密码</label>
+                <input type="password" id="login-password" placeholder="请输入密码">
+                <div class="error-message" id="login-password-error">请输入密码</div>
+            </div>
+            
+            <button class="btn" id="login-btn">登录</button>
+            
+            <div class="helper-links">
+                <a href="#" id="forgot-password">忘记密码?</a>
+            </div>
+            
+            <div class="form-toggle">
+                还没有账号? <a href="#" id="switch-to-register">立即注册</a>
+            </div>
+        </div>
+        
+        <!-- 注册表单 (默认隐藏) -->
+        <div id="register-form" class="form-container" style="display: none;">
+            <h2 class="form-title">账号注册</h2>
+            
+            <div class="input-group">
+                <label for="register-username">用户名</label>
+                <input type="text" id="register-username" placeholder="请设置用户名">
+                <div class="error-message" id="register-username-error">请设置用户名</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="register-phone">手机号</label>
+                <input type="tel" id="register-phone" placeholder="请输入手机号">
+                <div class="error-message" id="register-phone-error">请输入正确的手机号</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="register-password">密码</label>
+                <input type="password" id="register-password" placeholder="请设置密码">
+                <div class="error-message" id="register-password-error">密码长度不能少于6位</div>
+            </div>
+            
+            <div class="input-group">
+                <label for="register-confirm-password">确认密码</label>
+                <input type="password" id="register-confirm-password" placeholder="请再次输入密码">
+                <div class="error-message" id="register-confirm-password-error">两次密码输入不一致</div>
+            </div>
+            
+            <button class="btn" id="register-btn">注册</button>
+            
+            <div class="form-toggle">
+                已有账号? <a href="#" id="switch-to-login">立即登录</a>
+            </div>
+        </div>
+    </div>
 
-const response = await fetch('/api/users/login/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken')
-    },
-    body: JSON.stringify({ username, password })
-});
+    <!-- 仪表盘界面 -->
+    <div class="dashboard-body" id="dashboard">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2><span>治愈派</span>健康管理</h2>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fa fa-home"></i> 首页</a></li>
 
-                    const data = await response.json();
+                <li><a href="#"><i class="fa fa-bed"></i> 睡眠</a></li>
+                <li><a href="#"><i class="fa fa-cutlery"></i> 饮食</a></li>
+                <li><a href="#"><i class="fa fa-heartbeat"></i> 心率</a></li>
+                <li><a href="#"><i class="fa fa-line-chart"></i> 数据分析</a></li>
+                <li><a href="#"><i class="fa fa-user-md"></i> 健康建议</a></li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar" id="user-avatar">用</div>
+                    <div class="user-info">
+                        <div class="user-name" id="user-name">用户名</div>
+                        <div class="user-role">普通用户</div>
+                    </div>
+                    <button class="logout-btn" id="logout-btn"><i class="fa fa-sign-out"></i></button>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <div class="header">
+                <h1 class="page-title">今日健康数据</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="搜索...">
+                    <button><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            
+            <!-- 健康指标卡片 -->
+            <div class="health-cards">
+                <div class="health-card">
+                    <div class="card-header">
+                        <span class="card-title">今日步数</span>
+                        <i class="fa fa-walking" style="color: #3498db;"></i>
+                    </div>
+                    <div class="card-value" id="steps-value">8,500</div>
+                    <div class="card-extra">
+                        目标: 8,000
+                        <span class="trend up"><i class="fa fa-arrow-up"></i> 6.2%</span>
+                    </div>
+                </div>
+                
+                <div class="health-card">
+                    <div class="card-header">
+                        <span class="card-title">卡路里消耗</span>
+                        <i class="fa fa-fire" style="color: #e74c3c;"></i>
+                    </div>
+                    <div class="card-value" id="calories-value">420</div>
+                    <div class="card-extra">
+                        目标: 400
+                        <span class="trend up"><i class="fa fa-arrow-up"></i> 5.0%</span>
+                    </div>
+                </div>
+                
+                <div class="health-card" id="sleep-card">
+                    <div class="card-header">
+                        <span class="card-title">睡眠时长</span>
+                        <i class="fa fa-bed" style="color: #9b59b6;"></i>
+                    </div>
+                    <div class="card-value" id="sleep-value">7.5h</div>
+                    <div class="card-extra">
+                        目标: 8h
+                        <span class="trend down"><i class="fa fa-arrow-down"></i> 6.2%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 图表容器 -->
+            <div class="chart-container">
+                <div class="chart-header">
+                    <h2 class="chart-title">心率变化趋势</h2>
+                    <div class="chart-period">
+                        <button class="period-btn active">今日</button>
+                        <button class="period-btn">本周</button>
+                        <button class="period-btn">本月</button>
+                    </div>
+                </div>
+                <div class="chart">
+                    <canvas id="heartRateChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
 
-                    if (response.ok) {
-                        resultDiv.style.backgroundColor = '#dff0d8';
-                        resultDiv.style.color = '#3c763d';
-                        resultDiv.innerHTML = `登录成功！<br>用户ID: ${data.user_id}<br>访问令牌: ${data.tokens.access.substring(0, 20)}...`;
-                        // 清空表单
-                        document.getElementById('loginForm').reset();
-                    } else {
-                        resultDiv.style.backgroundColor = '#f2dede';
-                        resultDiv.style.color = '#a94442';
-                        resultDiv.textContent = `登录失败: ${data.error || '未知错误'}`;
+    <script>
+        // 获取DOM元素
+        const body = document.getElementById('body');
+        const loginContainer = document.getElementById('login-container');
+        const dashboard = document.getElementById('dashboard');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        const switchToRegisterBtn = document.getElementById('switch-to-register');
+        const switchToLoginBtn = document.getElementById('switch-to-login');
+        const loginBtn = document.getElementById('login-btn');
+        const registerBtn = document.getElementById('register-btn');
+        const forgotPasswordLink = document.getElementById('forgot-password');
+        const logoutBtn = document.getElementById('logout-btn');
+        const userAvatar = document.getElementById('user-avatar');
+        const userName = document.getElementById('user-name');
+        
+        // 检查是否已登录
+        function checkLoginStatus() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                // 已登录，显示仪表盘
+                showDashboard();
+            } else {
+                // 未登录，显示登录页面
+                showLoginPage();
+            }
+        }
+        
+        // 显示仪表盘
+        function showDashboard() {
+            body.classList.remove('login-body');
+            loginContainer.style.display = 'none';
+            dashboard.style.display = 'flex';
+            
+            // 设置用户信息
+            const username = localStorage.getItem('username') || '用户';
+            userName.textContent = username;
+            userAvatar.textContent = username.charAt(0);
+            
+            // 初始化图表
+        
+        // 添加睡眠卡片点击事件
+        const sleepCard = document.getElementById('sleep-card');
+        if (sleepCard) {
+            sleepCard.addEventListener('click', function() {
+                window.location.href = '/sleep_analysis';
+            });
+            
+            // 添加悬停效果
+            sleepCard.style.cursor = 'pointer';
+            sleepCard.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.2s ease';
+            });
+            
+            sleepCard.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        }
+            initCharts();
+        }
+        
+        // 显示登录页面
+        function showLoginPage() {
+            body.classList.add('login-body');
+            loginContainer.style.display = 'block';
+            dashboard.style.display = 'none';
+            loginForm.style.display = 'block';
+            registerForm.style.display = 'none';
+        }
+        
+        // 初始化图表
+        function initCharts() {
+            // 确保Chart已加载
+            if (typeof Chart !== 'undefined') {
+                // 心率图表
+                const ctx = document.getElementById('heartRateChart').getContext('2d');
+                
+                // 模拟数据
+                const labels = ['6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
+                const data = [70, 85, 72, 90, 75, 82, 78, 95];
+                
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: '心率 (bpm)',
+                            data: data,
+                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                            borderColor: 'rgba(52, 152, 219, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(52, 152, 219, 1)',
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            tension: 0.3,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                min: 60,
+                                max: 110,
+                                ticks: {
+                                    stepSize: 10
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
                     }
-                } catch (error) {
-                    resultDiv.style.backgroundColor = '#f2dede';
-                    resultDiv.style.color = '#a94442';
-                    resultDiv.textContent = `请求出错: ${error.message}`;
+                });
+            } else {
+                // 如果Chart未加载，延迟重试
+                setTimeout(initCharts, 500);
+            }
+        }
+        
+        // 表单切换
+        switchToRegisterBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            registerForm.style.display = 'block';
+        });
+        
+        switchToLoginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            registerForm.style.display = 'none';
+            loginForm.style.display = 'block';
+        });
+        
+        // 忘记密码链接
+        forgotPasswordLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('忘记密码功能暂未开放，敬请期待！');
+        });
+        
+        // 登录表单提交
+        loginBtn.addEventListener('click', function() {
+            let isValid = true;
+            
+            // 验证用户名
+            const loginUsername = document.getElementById('login-username');
+            const loginUsernameError = document.getElementById('login-username-error');
+            
+            if (!loginUsername.value.trim()) {
+                loginUsernameError.style.display = 'block';
+                isValid = false;
+            } else {
+                loginUsernameError.style.display = 'none';
+            }
+            
+            // 验证密码
+            const loginPassword = document.getElementById('login-password');
+            const loginPasswordError = document.getElementById('login-password-error');
+            
+            if (!loginPassword.value) {
+                loginPasswordError.style.display = 'block';
+                isValid = false;
+            } else {
+                loginPasswordError.style.display = 'none';
+            }
+            
+            // 如果验证通过，提交表单
+            if (isValid) {
+                // 模拟API请求
+                const username = loginUsername.value;
+                const password = loginPassword.value;
+                
+                fetch('/api/users/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('登录失败，请检查用户名和密码');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 保存token和用户名
+                    localStorage.setItem('token', data.tokens.access);
+                    localStorage.setItem('refresh_token', data.tokens.refresh);
+                    localStorage.setItem('username', username);
+                    
+                    // 显示仪表盘
+                    showDashboard();
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+            }
+        });
+        
+        // 注册表单提交
+        registerBtn.addEventListener('click', function() {
+            let isValid = true;
+            
+            // 验证用户名
+            const registerUsername = document.getElementById('register-username');
+            const registerUsernameError = document.getElementById('register-username-error');
+            
+            if (!registerUsername.value.trim()) {
+                registerUsernameError.style.display = 'block';
+                isValid = false;
+            } else {
+                registerUsernameError.style.display = 'none';
+            }
+            
+            // 验证手机号
+            const registerPhone = document.getElementById('register-phone');
+            const registerPhoneError = document.getElementById('register-phone-error');
+            
+            // 简单的手机号验证，以1开头的11位数字
+            const phoneRegex = /^1\d{10}$/;
+            if (!registerPhone.value || !phoneRegex.test(registerPhone.value)) {
+                registerPhoneError.style.display = 'block';
+                isValid = false;
+            } else {
+                registerPhoneError.style.display = 'none';
+            }
+            
+            // 验证密码
+            const registerPassword = document.getElementById('register-password');
+            const registerPasswordError = document.getElementById('register-password-error');
+            
+            if (!registerPassword.value || registerPassword.value.length < 6) {
+                registerPasswordError.style.display = 'block';
+                isValid = false;
+            } else {
+                registerPasswordError.style.display = 'none';
+            }
+            
+            // 验证确认密码
+            const registerConfirmPassword = document.getElementById('register-confirm-password');
+            const registerConfirmPasswordError = document.getElementById('register-confirm-password-error');
+            
+            if (registerConfirmPassword.value !== registerPassword.value) {
+                registerConfirmPasswordError.style.display = 'block';
+                isValid = false;
+            } else {
+                registerConfirmPasswordError.style.display = 'none';
+            }
+            
+            // 如果验证通过，提交表单
+            if (isValid) {
+                // 模拟API请求
+                const username = registerUsername.value;
+                const phone = registerPhone.value;
+                const password = registerPassword.value;
+                
+                fetch('/api/users/register/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        phone: phone,
+                        password: password
+                    })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // 尝试获取API返回的具体错误信息
+                        return response.json().then(errorData => {
+                            throw new Error(errorData.error || '注册失败，请稍后再试');
+                        }).catch(() => {
+                            throw new Error(`注册失败，状态码: ${response.status}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('注册成功，请登录！');
+                    // 切换到登录表单
+                    registerForm.style.display = 'none';
+                    loginForm.style.display = 'block';
+                    // 填充用户名
+                    document.getElementById('login-username').value = username;
+                })
+                .catch(error => {
+                    alert(`注册错误: ${error.message}`);
+                });
+            }
+        });
+        
+        // 退出登录
+        logoutBtn.addEventListener('click', function() {
+            // 清除本地存储
+            localStorage.removeItem('token');
+            localStorage.removeItem('refresh_token');
+            localStorage.removeItem('username');
+            
+            // 显示登录页面
+            showLoginPage();
+        });
+        
+        // 输入框失焦验证
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.id === 'login-username') {
+                    const errorElement = document.getElementById('login-username-error');
+                    if (!this.value.trim()) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                } else if (this.id === 'login-password') {
+                    const errorElement = document.getElementById('login-password-error');
+                    if (!this.value) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                } else if (this.id === 'register-username') {
+                    const errorElement = document.getElementById('register-username-error');
+                    if (!this.value.trim()) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                } else if (this.id === 'register-phone') {
+                    const errorElement = document.getElementById('register-phone-error');
+                    const phoneRegex = /^1\d{10}$/;
+                    if (!this.value || !phoneRegex.test(this.value)) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                } else if (this.id === 'register-password') {
+                    const errorElement = document.getElementById('register-password-error');
+                    if (!this.value || this.value.length < 6) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
+                } else if (this.id === 'register-confirm-password') {
+                    const errorElement = document.getElementById('register-confirm-password-error');
+                    if (this.value !== document.getElementById('register-password').value) {
+                        errorElement.style.display = 'block';
+                    } else {
+                        errorElement.style.display = 'none';
+                    }
                 }
             });
-        </script>
-    </div>
+        });
+        
+        // 页面加载时检查登录状态
+        window.addEventListener('load', checkLoginStatus);
+    </script>
 </body>
 </html>
