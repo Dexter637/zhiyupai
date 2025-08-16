@@ -17,6 +17,8 @@ import json
 import sys
 import os
 from datetime import datetime, timedelta
+import pymongo
+from pymongo import errors
 
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -34,7 +36,7 @@ def register_user(request):
         data = json.loads(request.body)
         
         # 验证必填字段
-        required_fields = ['username', 'password']
+        required_fields = ['username', 'password', 'phone']
         for field in required_fields:
             if field not in data:
                 return JsonResponse(
@@ -47,6 +49,13 @@ def register_user(request):
         if not re.match(r'^[a-zA-Z0-9]+$', data['username']):
             return JsonResponse(
                 {"error": "用户名只能包含英文和数字"},
+                status=400
+            )
+
+        # 验证手机号格式（简单验证，以1开头的11位数字）
+        if not re.match(r'^1\d{10}$', data['phone']):
+            return JsonResponse(
+                {"error": "手机号格式不正确，必须是以1开头的11位数字"},
                 status=400
             )
 
@@ -74,11 +83,22 @@ def register_user(request):
                 status=400
             )
         
+        # 检查手机号是否已存在
+        existing_profile = UserProfile.find({"phone": data['phone']})
+        if existing_profile:
+            # 如果用户已创建但手机号重复，删除用户
+            user.delete()
+            return JsonResponse(
+                {"error": "手机号已被注册"},
+                status=400
+            )
+        
         # 创建MongoDB用户档案
         profile_data = {
             "user_id": str(user.id),
             "username": data['username'],
-            "email": None,
+            "phone": data['phone'],  # 使用phone字段而非email
+            "email": None,  # 保留email字段以保持向后兼容性
             "date_joined": datetime.now(),
             "is_active": True
         }
@@ -90,7 +110,15 @@ def register_user(request):
                 profile_data[field] = data[field]
         
         # 保存用户档案到MongoDB
-        profile_id = UserProfile.create(profile_data)
+        try:
+            profile_id = UserProfile.create(profile_data)
+        except pymongo.errors.DuplicateKeyError:
+            # 如果MongoDB中手机号重复，删除Django用户
+            user.delete()
+            return JsonResponse(
+                {"error": "手机号已被注册"},
+                status=400
+            )
         
         # 生成JWT令牌
         refresh = RefreshToken.for_user(user)
