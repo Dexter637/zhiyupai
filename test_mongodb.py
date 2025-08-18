@@ -120,7 +120,8 @@ def create_indexes(client=None):
         # 为用户档案创建索引
         user_collection = db[USER_PROFILES_COLLECTION]
         user_collection.create_index([("user_id", pymongo.ASCENDING)], unique=True)
-        user_collection.create_index([("email", pymongo.ASCENDING)], unique=True)
+        # 创建phone字段的唯一索引，使用sparse=True允许null值
+        user_collection.create_index([("phone", pymongo.ASCENDING)], unique=True, sparse=True)
         print(f"✅ 为 {USER_PROFILES_COLLECTION} 创建索引成功")
         
         print("✅ 成功创建所有索引")
