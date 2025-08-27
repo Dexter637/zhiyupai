@@ -8,6 +8,7 @@ from django.conf import settings
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
 from django.http import JsonResponse
 import json
 from rest_framework.views import APIView
@@ -149,20 +150,36 @@ def login_user(request):
         data = json.loads(request.body)
         
         # 验证必填字段
-        required_fields = ['username', 'password']
-        for field in required_fields:
-            if field not in data:
-                return JsonResponse(
-                {"error": f"缺少必填字段: {field}"},
+        if 'username' not in data and 'phone' not in data:
+            return JsonResponse(
+                {"error": "缺少必填字段: username 或 phone"},
                 status=400
             )
         
-        # 验证用户
-        user = authenticate(username=data['username'], password=data['password'])
+        if 'password' not in data:
+            return JsonResponse(
+                {"error": "缺少必填字段: password"},
+                status=400
+            )
+        
+        # 确定登录标识符（用户名或手机号）
+        identifier = data.get('username') or data.get('phone')
+        password = data['password']
+        
+        # 验证用户（支持用户名和手机号登录）
+        # 首先尝试用户名登录
+        user = authenticate(username=identifier, password=password)
+        
+        # 如果用户名登录失败，尝试手机号登录
+        if user is None:
+            # 检查是否是手机号格式
+            import re
+            if re.match(r'^1\d{10}$', identifier):
+                user = authenticate(phone=identifier, password=password)
         
         if user is None:
             return JsonResponse(
-                {"error": "用户名或密码错误"},
+                {"error": "用户名/手机号或密码错误"},
                 status=401
             )
         
@@ -175,7 +192,8 @@ def login_user(request):
         return JsonResponse({
             "status": "success",
             "message": "用户登录成功",
-            "user_id": user.id,
+            "user_id": str(user.id),  # 返回字符串格式的用户ID，与MongoDB中的存储格式一致
+            "username": user.username,  # 添加username字段
             "profile_id": str(profile['_id']) if profile else None,
             "tokens": {
                 "refresh": str(refresh),

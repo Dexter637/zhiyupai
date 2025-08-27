@@ -1,8 +1,13 @@
 # MongoDB配置文件
 
-# MongoDB连接信息
-MONGO_URI = "mongodb://localhost:27017/"
-DATABASE_NAME = "health_data"
+# MongoDB连接信息 - Docker环境配置
+# 当前测试结果显示Docker中的MongoDB使用无认证模式
+MONGO_URI = "mongodb://localhost:27017/health_db"
+DATABASE_NAME = "health_db"
+
+# 注意：如果需要在非Docker环境下运行，可以使用以下配置
+# MONGO_URI = "mongodb://localhost:27017/"
+# DATABASE_NAME = "health_data"
 
 # 集合名称
 COLLECTIONS = {

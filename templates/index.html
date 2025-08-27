@@ -487,9 +487,9 @@
             }
         }
     </style>
-    <!-- 使用更稳定的CDN链接 -->
+    <!-- 使用本地静态文件 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="/static/js/chart.umd.min.js"></script>
 </head>
 <body class="login-body" id="body">
     <!-- 登录容器 -->
@@ -503,9 +503,9 @@
             <h2 class="form-title">账号登录</h2>
             
             <div class="input-group">
-                <label for="login-username">用户名</label>
-                <input type="text" id="login-username" placeholder="请输入用户名">
-                <div class="error-message" id="login-username-error">请输入用户名</div>
+                <label for="login-username">用户名/手机号</label>
+                <input type="text" id="login-username" placeholder="请输入用户名或手机号">
+                <div class="error-message" id="login-username-error">请输入用户名或手机号</div>
             </div>
             
             <div class="input-group">
@@ -638,6 +638,40 @@
                         <span class="trend down"><i class="fa fa-arrow-down"></i> 6.2%</span>
                     </div>
                 </div>
+                
+                <!-- 新增健康指标卡片 -->
+                <div class="health-card" id="heart-rate-card">
+                    <div class="card-header">
+                        <span class="card-title">心率</span>
+                        <i class="fa fa-heartbeat" style="color: #e74c3c;"></i>
+                    </div>
+                    <div class="card-value">---</div>
+                    <div class="card-extra">
+                        正常范围: 60-100 bpm
+                    </div>
+                </div>
+                
+                <div class="health-card" id="glucose-card">
+                    <div class="card-header">
+                        <span class="card-title">血糖</span>
+                        <i class="fa fa-tint" style="color: #e67e22;"></i>
+                    </div>
+                    <div class="card-value">--- mmol/L</div>
+                    <div class="card-extra">
+                        空腹正常: 3.9-6.1 mmol/L
+                    </div>
+                </div>
+                
+                <div class="health-card" id="pressure-card">
+                    <div class="card-header">
+                        <span class="card-title">血压</span>
+                        <i class="fa fa-tachometer" style="color: #34495e;"></i>
+                    </div>
+                    <div class="card-value">---/--- mmHg</div>
+                    <div class="card-extra">
+                        正常范围: ≤120/80 mmHg
+                    </div>
+                </div>
             </div>
             
             <!-- 图表容器 -->
@@ -696,27 +730,41 @@
             userName.textContent = username;
             userAvatar.textContent = username.charAt(0);
             
-            // 初始化图表
-        
-        // 添加睡眠卡片点击事件
-        const sleepCard = document.getElementById('sleep-card');
-        if (sleepCard) {
-            sleepCard.addEventListener('click', function() {
-                window.location.href = '/sleep_analysis';
-            });
+            // 加载用户健康数据
+            loadUserHealthData();
             
-            // 添加悬停效果
-            sleepCard.style.cursor = 'pointer';
-            sleepCard.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.02)';
-                this.style.transition = 'transform 0.2s ease';
-            });
+            // 添加睡眠卡片点击事件
+            const sleepCard = document.getElementById('sleep-card');
+            if (sleepCard) {
+                sleepCard.addEventListener('click', function() {
+                    window.location.href = '/sleep_analysis';
+                });
+                
+                // 添加悬停效果
+                sleepCard.style.cursor = 'pointer';
+                sleepCard.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.transition = 'transform 0.2s ease';
+                });
+                
+                sleepCard.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            }
             
-            sleepCard.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
+            // 为所有健康卡片添加悬停效果
+            const healthCards = document.querySelectorAll('.health-card');
+            healthCards.forEach(card => {
+                card.style.cursor = 'pointer';
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.transition = 'transform 0.2s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
             });
-        }
-            initCharts();
         }
         
         // 显示登录页面
@@ -728,58 +776,263 @@
             registerForm.style.display = 'none';
         }
         
-        // 初始化图表
-        function initCharts() {
-            // 确保Chart已加载
-            if (typeof Chart !== 'undefined') {
-                // 心率图表
-                const ctx = document.getElementById('heartRateChart').getContext('2d');
-                
-                // 模拟数据
-                const labels = ['6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
-                const data = [70, 85, 72, 90, 75, 82, 78, 95];
-                
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: '心率 (bpm)',
-                            data: data,
-                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                            borderColor: 'rgba(52, 152, 219, 1)',
-                            borderWidth: 2,
-                            pointBackgroundColor: 'rgba(52, 152, 219, 1)',
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
-                            tension: 0.3,
-                            fill: true
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                min: 60,
-                                max: 110,
-                                ticks: {
-                                    stepSize: 10
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            }
-                        }
+        // 加载用户健康数据
+        function loadUserHealthData() {
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('user_id');
+            
+            if (!token || !userId) {
+                console.error('缺少登录信息，无法加载健康数据');
+                // 显示NULL值
+                const healthCardValues = document.querySelectorAll('.card-value, #sleep-value');
+                healthCardValues.forEach(el => {
+                    if (el.id === 'sleep-value') {
+                        el.textContent = 'NULL';
+                    } else if (el.closest('#pressure-card')) {
+                        el.textContent = 'NULL/NULL mmHg';
+                    } else if (el.closest('#glucose-card')) {
+                        el.textContent = 'NULL mmol/L';
+                    } else {
+                        el.textContent = 'NULL';
                     }
                 });
-            } else {
-                // 如果Chart未加载，延迟重试
-                setTimeout(initCharts, 500);
+                // 使用模拟数据初始化图表
+                initDefaultCharts();
+                return;
             }
+            
+            // 加载心率数据
+            fetch(`/api/health/heart-rate/${userId}/`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('加载心率数据失败');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.data && data.data.length > 0) {
+                    // 显示最新心率数据
+                    const latestHeartRate = data.data[0];
+                    const heartRateCard = document.getElementById('heart-rate-card');
+                    if (heartRateCard) {
+                        const heartRateValue = heartRateCard.querySelector('.card-value');
+                        if (heartRateValue) {
+                            heartRateValue.textContent = latestHeartRate.value || 'NULL';
+                        }
+                    }
+                    
+                    // 初始化心率图表
+                    initHealthChart('heartRateChart', data.data, '心率 (bpm)', 'rgba(52, 152, 219, 1)');
+                } else {
+                    // 数据为空时显示NULL
+                    const heartRateCard = document.getElementById('heart-rate-card');
+                    if (heartRateCard) {
+                        const heartRateValue = heartRateCard.querySelector('.card-value');
+                        if (heartRateValue) {
+                            heartRateValue.textContent = 'NULL';
+                        }
+                    }
+                    // 使用模拟数据
+                    initDefaultCharts();
+                }
+            })
+            .catch(error => {
+                console.error('加载心率数据出错:', error);
+                // 查询失败时显示NULL
+                const heartRateCard = document.getElementById('heart-rate-card');
+                if (heartRateCard) {
+                    const heartRateValue = heartRateCard.querySelector('.card-value');
+                    if (heartRateValue) {
+                        heartRateValue.textContent = 'NULL';
+                    }
+                }
+                // 使用模拟数据
+                initDefaultCharts();
+            });
+            
+            // 加载血糖数据
+            fetch(`/api/health/wearable-data/${userId}/?data_type=blood_glucose`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('加载血糖数据失败');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.data && data.data.length > 0) {
+                    const latestGlucose = data.data[0];
+                    const glucoseCard = document.getElementById('glucose-card');
+                    if (glucoseCard) {
+                        const glucoseValue = glucoseCard.querySelector('.card-value');
+                        if (glucoseValue) {
+                            glucoseValue.textContent = (latestGlucose.value || 'NULL') + ' mmol/L';
+                        }
+                    }
+                } else {
+                    // 数据为空时显示NULL
+                    const glucoseCard = document.getElementById('glucose-card');
+                    if (glucoseCard) {
+                        const glucoseValue = glucoseCard.querySelector('.card-value');
+                        if (glucoseValue) {
+                            glucoseValue.textContent = 'NULL mmol/L';
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('加载血糖数据出错:', error);
+                // 查询失败时显示NULL
+                const glucoseCard = document.getElementById('glucose-card');
+                if (glucoseCard) {
+                    const glucoseValue = glucoseCard.querySelector('.card-value');
+                    if (glucoseValue) {
+                        glucoseValue.textContent = 'NULL mmol/L';
+                    }
+                }
+            });
+            
+            // 加载血压数据
+            fetch(`/api/health/wearable-data/${userId}/?data_type=blood_pressure`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('加载血压数据失败');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.data && data.data.length > 0) {
+                    const latestPressure = data.data[0];
+                    const pressureCard = document.getElementById('pressure-card');
+                    if (pressureCard) {
+                        const pressureValue = pressureCard.querySelector('.card-value');
+                        if (pressureValue) {
+                            pressureValue.textContent = `${latestPressure.systolic || 'NULL'}/${latestPressure.diastolic || 'NULL'} mmHg`;
+                        }
+                    }
+                } else {
+                    // 数据为空时显示NULL
+                    const pressureCard = document.getElementById('pressure-card');
+                    if (pressureCard) {
+                        const pressureValue = pressureCard.querySelector('.card-value');
+                        if (pressureValue) {
+                            pressureValue.textContent = 'NULL/NULL mmHg';
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('加载血压数据出错:', error);
+                // 查询失败时显示NULL
+                const pressureCard = document.getElementById('pressure-card');
+                if (pressureCard) {
+                    const pressureValue = pressureCard.querySelector('.card-value');
+                    if (pressureValue) {
+                        pressureValue.textContent = 'NULL/NULL mmHg';
+                    }
+                }
+            });
+            
+            // 加载睡眠数据
+            fetch(`/api/health/sleep/${userId}/`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('加载睡眠数据失败');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.data && data.data.length > 0) {
+                    const latestSleep = data.data[0];
+                    const sleepValue = document.getElementById('sleep-value');
+                    if (sleepValue) {
+                        // 计算睡眠时长（小时）
+                        let sleepDuration = 'NULL';
+                        if (latestSleep.duration) {
+                            sleepDuration = (latestSleep.duration / 60).toFixed(1) + 'h';
+                        } else if (latestSleep.values && latestSleep.values.total_sleep_mins) {
+                            sleepDuration = (latestSleep.values.total_sleep_mins / 60).toFixed(1) + 'h';
+                        }
+                        sleepValue.textContent = sleepDuration;
+                    }
+                } else {
+                    // 数据为空时显示NULL
+                    const sleepValue = document.getElementById('sleep-value');
+                    if (sleepValue) {
+                        sleepValue.textContent = 'NULL';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('加载睡眠数据出错:', error);
+                // 查询失败时显示NULL
+                const sleepValue = document.getElementById('sleep-value');
+                if (sleepValue) {
+                    sleepValue.textContent = 'NULL';
+                }
+            });
+        }
+        
+        // 初始化健康图表
+        function initHealthChart(chartId, data, label, color) {
+            if (typeof createBasicChart === 'undefined') {
+                setTimeout(() => initHealthChart(chartId, data, label, color), 500);
+                return;
+            }
+            
+            // 准备图表数据
+            const labels = data.map(item => {
+                const date = new Date(item.timestamp);
+                return `${date.getHours()}:${date.getMinutes().toString().padStart(2, '0')}`;
+            });
+            
+            // 从不同格式的数据中提取值
+            const chartData = data.map(item => {
+                if (item.value !== undefined) return item.value;
+                if (item.values && item.values.value !== undefined) return item.values.value;
+                return 0;
+            });
+            
+            // 使用我们自己的createBasicChart函数
+            createBasicChart(chartId, labels, chartData, ['rgba(52, 152, 219, 1)']);
+        }
+        
+        // 初始化默认图表（使用模拟数据）
+        function initDefaultCharts() {
+            if (typeof createBasicChart === 'undefined') {
+                setTimeout(initDefaultCharts, 500);
+                return;
+            }
+            
+            // 心率图表 - 使用我们自己的createBasicChart函数
+            const labels = ['6:00', '8:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00'];
+            const data = [70, 85, 72, 90, 75, 82, 78, 95];
+            const colors = ['rgba(52, 152, 219, 1)', 'rgba(52, 152, 219, 0.8)', 'rgba(52, 152, 219, 0.6)', 'rgba(52, 152, 219, 0.4)', 'rgba(52, 152, 219, 0.7)', 'rgba(52, 152, 219, 0.9)', 'rgba(52, 152, 219, 1)', 'rgba(52, 152, 219, 0.8)'];
+            
+            createBasicChart('heartRateChart', labels, data, colors);
         }
         
         // 表单切换
@@ -805,7 +1058,7 @@
         loginBtn.addEventListener('click', function() {
             let isValid = true;
             
-            // 验证用户名
+            // 验证用户名/手机号
             const loginUsername = document.getElementById('login-username');
             const loginUsernameError = document.getElementById('login-username-error');
             
@@ -830,8 +1083,11 @@
             // 如果验证通过，提交表单
             if (isValid) {
                 // 模拟API请求
-                const username = loginUsername.value;
+                const identifier = loginUsername.value;
                 const password = loginPassword.value;
+                
+                // 判断输入是手机号还是用户名
+                const isPhone = /^1\d{10}$/.test(identifier);
                 
                 fetch('/api/users/login/', {
                     method: 'POST',
@@ -839,13 +1095,13 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        username: username,
+                        ...(isPhone ? { phone: identifier } : { username: identifier }),
                         password: password
                     })
                 })
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('登录失败，请检查用户名和密码');
+                        throw new Error('登录失败，请检查用户名/手机号和密码');
                     }
                     return response.json();
                 })
@@ -853,7 +1109,8 @@
                     // 保存token和用户名
                     localStorage.setItem('token', data.tokens.access);
                     localStorage.setItem('refresh_token', data.tokens.refresh);
-                    localStorage.setItem('username', username);
+                    localStorage.setItem('username', data.username);
+                    localStorage.setItem('user_id', data.user_id);
                     
                     // 显示仪表盘
                     showDashboard();
@@ -963,6 +1220,7 @@
             localStorage.removeItem('token');
             localStorage.removeItem('refresh_token');
             localStorage.removeItem('username');
+            localStorage.removeItem('user_id');
             
             // 显示登录页面
             showLoginPage();

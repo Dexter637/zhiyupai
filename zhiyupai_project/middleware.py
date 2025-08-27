@@ -18,6 +18,9 @@ class SecurityMiddleware:
             r'^/admin/',  # 管理后台URL
             r'^/api-auth/',  # DRF认证URL
             r'^/api/wearable/upload/$',  # 可穿戴设备数据上传URL
+            r'^/api/users/profile/\d+/$',  # 用户档案URL
+            r'^/api/health/',  # 健康数据API URL
+            r'^/api/sleep-data/',  # 睡眠数据API URL
         ]]
     
     def __call__(self, request):

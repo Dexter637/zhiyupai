@@ -16,12 +16,17 @@ def get_sleep_data_api(request):
     """获取用户睡眠数据的API接口"""
     try:
         # 获取查询参数
-        username = request.GET.get('username', 'admin')  # 默认使用admin用户
-        print(f"请求的用户名: {username}")
+        user_id = request.GET.get('user_id')
         
-        # 注意：UserProfile类中没有find_by_username方法，这里直接使用测试数据
-        # 实际项目中应该实现find_by_username或从其他地方获取用户ID
-        user_id = username  # 简化处理，直接使用username作为user_id
+        # 如果没有提供user_id，返回错误
+        if not user_id:
+            return JsonResponse({
+                "status": "error",
+                "message": "缺少user_id参数"
+            }, status=400)
+        
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
         print(f"使用的用户ID: {user_id}")
         
         # 获取最近5天的睡眠数据

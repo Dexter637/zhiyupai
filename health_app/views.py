@@ -13,12 +13,31 @@ import pandas as pd
 from datetime import datetime, timedelta
 import sys
 import os
+from bson import ObjectId
 
 # 添加项目根目录到Python路径
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # 导入MongoDB模型
 from models import WearableData, HeartRateAlert, ActivityRecommendation, UserProfile
+
+# JSON序列化辅助函数
+def serialize_mongo_data(data):
+    """将MongoDB数据转换为可JSON序列化的格式"""
+    if isinstance(data, list):
+        return [serialize_mongo_data(item) for item in data]
+    elif isinstance(data, dict):
+        result = {}
+        for key, value in data.items():
+            if isinstance(value, ObjectId):
+                result[key] = str(value)
+            elif isinstance(value, (list, dict)):
+                result[key] = serialize_mongo_data(value)
+            else:
+                result[key] = value
+        return result
+    else:
+        return data
 
 # 导入健康监测和推荐模块
 from health_monitoring.heart_rate_monitor import HeartRateMonitor
@@ -43,7 +62,7 @@ def heart_rate_list(request):
         return Response({
             "status": "success",
             "count": len(results),
-            "data": results
+            "data": serialize_mongo_data(results)
         })
         
     except Exception as e:
@@ -57,6 +76,17 @@ def heart_rate_list(request):
 def heart_rate_detail(request, user_id):
     """获取特定用户的心率数据"""
     try:
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
+        
+        # 检查权限（只能查看自己的数据，除非是管理员）
+        # 确保比较的是相同类型的用户ID（都转换为字符串）
+        if str(request.user.id) != str(user_id) and not request.user.is_staff:
+            return Response(
+                {"error": "您没有权限查看此用户数据"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
         # 获取查询参数
         start_time = request.query_params.get('start_time')
         end_time = request.query_params.get('end_time')
@@ -74,7 +104,7 @@ def heart_rate_detail(request, user_id):
         return Response({
             "status": "success",
             "count": len(results),
-            "data": results
+            "data": serialize_mongo_data(results)
         })
         
     except Exception as e:
@@ -88,6 +118,9 @@ def heart_rate_detail(request, user_id):
 def heart_rate_alerts(request, user_id):
     """获取用户的心率异常警报"""
     try:
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
+        
         # 获取查询参数
         unread_only = request.query_params.get('unread_only', 'false').lower() == 'true'
         limit = int(request.query_params.get('limit', 20))
@@ -126,7 +159,7 @@ def sleep_data_list(request):
         return Response({
             "status": "success",
             "count": len(results),
-            "data": results
+            "data": serialize_mongo_data(results)
         })
         
     except Exception as e:
@@ -140,6 +173,17 @@ def sleep_data_list(request):
 def sleep_data_detail(request, user_id):
     """获取特定用户的睡眠数据"""
     try:
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
+        
+        # 检查权限（只能查看自己的数据，除非是管理员）
+        # 确保比较的是相同类型的用户ID（都转换为字符串）
+        if str(request.user.id) != str(user_id) and not request.user.is_staff:
+            return Response(
+                {"error": "您没有权限查看此用户数据"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
         # 获取查询参数
         start_time = request.query_params.get('start_time')
         end_time = request.query_params.get('end_time')
@@ -157,7 +201,7 @@ def sleep_data_detail(request, user_id):
         return Response({
             "status": "success",
             "count": len(results),
-            "data": results
+            "data": serialize_mongo_data(results)
         })
         
     except Exception as e:
@@ -172,6 +216,9 @@ def sleep_data_detail(request, user_id):
 def activity_recommendations(request, user_id):
     """获取用户的活动推荐"""
     try:
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
+        
         # 获取查询参数
         recent_only = request.query_params.get('recent_only', 'true').lower() == 'true'
         limit = int(request.query_params.get('limit', 10))
@@ -286,6 +333,17 @@ def wearable_data_upload(request):
 def get_user_wearable_data(request, user_id):
     """获取用户的可穿戴设备数据"""
     try:
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
+        
+        # 检查权限（只能查看自己的数据，除非是管理员）
+        # 确保比较的是相同类型的用户ID（都转换为字符串）
+        if str(request.user.id) != str(user_id) and not request.user.is_staff:
+            return Response(
+                {"error": "您没有权限查看此用户数据"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+        
         # 获取查询参数
         device_id = request.query_params.get('device_id')
         data_type = request.query_params.get('data_type')
@@ -305,7 +363,7 @@ def get_user_wearable_data(request, user_id):
         return Response({
             "status": "success",
             "count": len(results),
-            "data": results
+            "data": serialize_mongo_data(results)
         })
         
     except Exception as e:
@@ -319,6 +377,9 @@ def get_user_wearable_data(request, user_id):
 def get_data_summary(request, user_id, data_type):
     """获取用户特定类型数据的摘要统计"""
     try:
+        # 确保user_id是字符串格式
+        user_id = str(user_id)
+        
         # 获取查询参数
         start_time = request.query_params.get('start_time')
         end_time = request.query_params.get('end_time')
