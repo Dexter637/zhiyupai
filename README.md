@@ -188,7 +188,9 @@ docker exec -it mongodb-container mongosh -u health_user -p health_password --au
 打开浏览器访问：http://localhost:8081
 - 用户名：admin
 - 密码：admin123
-- 连接字符串：mongodb://admin:admin123@mongodb:27017/
+- 连接字符串：mongodb://admin:admin123@localhost:27017/
+
+**重要更新**：由于Docker网络配置问题，Mongo Express现在使用MongoDB容器的IP地址（172.18.0.3）进行连接，而不是主机名"mongodb"。这不会影响应用层的数据库连接。
 
 ##### 2.6 数据库连接配置
 在项目的 `config.py` 文件中配置连接信息：
