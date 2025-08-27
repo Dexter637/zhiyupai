@@ -192,6 +192,9 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # 默认认证后端
 ]
 
+# 登录URL配置
+LOGIN_URL = '/api/users/login/'
+
 # JWT配置
 from datetime import timedelta
 SIMPLE_JWT = {

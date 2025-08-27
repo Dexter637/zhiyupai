@@ -25,7 +25,6 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
-    path('sleep_analysis/', TemplateView.as_view(template_name='sleep_analysis.html'), name='sleep_analysis'),
     path('admin/', admin.site.urls),
     
     # JWT认证路由

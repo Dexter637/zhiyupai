@@ -1,0 +1,35 @@
+[
+  {
+    "_id": "68a0637307e18c38922a3c23",
+    "user_id": "12",
+    "username": "testuser123",
+    "phone": "13800138000",
+    "email": null,
+    "date_joined": "2025-08-16 18:54:43.244000",
+    "is_active": true,
+    "created_at": "2025-08-16 18:54:43.244000",
+    "updated_at": "2025-08-16 18:54:43.244000"
+  },
+  {
+    "_id": "68a0649d07e18c38922a3c24",
+    "user_id": "13",
+    "username": "testuser456",
+    "phone": "13900139000",
+    "email": null,
+    "date_joined": "2025-08-16 18:59:41.477000",
+    "is_active": true,
+    "created_at": "2025-08-16 18:59:41.477000",
+    "updated_at": "2025-08-16 18:59:41.477000"
+  },
+  {
+    "_id": "68a066faf6acfd937fb8cca2",
+    "user_id": "14",
+    "username": "dexter637",
+    "phone": "15848936105",
+    "email": null,
+    "date_joined": "2025-08-16 19:09:46.351000",
+    "is_active": true,
+    "created_at": "2025-08-16 19:09:46.351000",
+    "updated_at": "2025-08-16 19:09:46.351000"
+  }
+]

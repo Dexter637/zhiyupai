@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-08-26T16:20:01.515981",
+  "database": "health_data",
+  "collections_count": 5,
+  "collections": [
+    "sleep_records",
+    "wearable_data",
+    "heart_rate_alerts",
+    "user_profiles",
+    "activity_recommendations"
+  ]
+}

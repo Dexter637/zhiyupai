@@ -1,0 +1,400 @@
+[
+  {
+    "_id": "68a06827b5fd6b5f932332af",
+    "data_type": "heart_rate",
+    "value": 72,
+    "unit": "bpm",
+    "user_id": "12",
+    "timestamp": "2025-08-16 19:14:47.304000"
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f01",
+    "user_id": "user001",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-16 11:38:18.273000",
+    "sleep_start_time": "2025-08-16 04:08:30.102000",
+    "sleep_end_time": "2025-08-16 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 449.80284918067395,
+      "deep_sleep_mins": 116.85837146856545,
+      "rem_sleep_mins": 103.42448443003532,
+      "light_sleep_mins": 229.5199932820732,
+      "sleep_efficiency": 0.7812037280884873,
+      "interruptions": 1
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f02",
+    "user_id": "user001",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-15 11:38:18.273000",
+    "sleep_start_time": "2025-08-15 04:46:36.024000",
+    "sleep_end_time": "2025-08-15 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 411.7041419297289,
+      "deep_sleep_mins": 71.38915981057274,
+      "rem_sleep_mins": 83.53649157134016,
+      "light_sleep_mins": 256.77849054781603,
+      "sleep_efficiency": 0.923235229154987,
+      "interruptions": 4
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f03",
+    "user_id": "user001",
+    "device_id": "apple_watch_456",
+    "data_type": "sleep",
+    "timestamp": "2025-08-14 11:38:18.273000",
+    "sleep_start_time": "2025-08-14 03:03:33.107000",
+    "sleep_end_time": "2025-08-14 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 514.7527689304435,
+      "deep_sleep_mins": 78.80230415493611,
+      "rem_sleep_mins": 127.91374288675388,
+      "light_sleep_mins": 308.0367218887535,
+      "sleep_efficiency": 0.9164885281600843,
+      "interruptions": 0
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f04",
+    "user_id": "user001",
+    "device_id": "mi_band_789",
+    "data_type": "sleep",
+    "timestamp": "2025-08-13 11:38:18.273000",
+    "sleep_start_time": "2025-08-13 03:52:15.508000",
+    "sleep_end_time": "2025-08-13 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 466.0460837491745,
+      "deep_sleep_mins": 84.75088420613514,
+      "rem_sleep_mins": 97.44615744456947,
+      "light_sleep_mins": 283.8490420984699,
+      "sleep_efficiency": 0.7866809019706867,
+      "interruptions": 3
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f05",
+    "user_id": "user001",
+    "device_id": "mi_band_789",
+    "data_type": "sleep",
+    "timestamp": "2025-08-12 11:38:18.273000",
+    "sleep_start_time": "2025-08-12 04:23:47.209000",
+    "sleep_end_time": "2025-08-12 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 434.51773629396206,
+      "deep_sleep_mins": 93.33082619966811,
+      "rem_sleep_mins": 93.2307585958769,
+      "light_sleep_mins": 247.956151498417,
+      "sleep_efficiency": 0.8723705789444759,
+      "interruptions": 2
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f06",
+    "user_id": "user001",
+    "device_id": "mi_band_789",
+    "data_type": "sleep",
+    "timestamp": "2025-08-11 11:38:18.273000",
+    "sleep_start_time": "2025-08-11 06:33:06.082000",
+    "sleep_end_time": "2025-08-11 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 305.20318532053216,
+      "deep_sleep_mins": 52.16657338862906,
+      "rem_sleep_mins": 65.49881092947123,
+      "light_sleep_mins": 187.53780100243188,
+      "sleep_efficiency": 0.8232723686587383,
+      "interruptions": 1
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f07",
+    "user_id": "user001",
+    "device_id": "apple_watch_456",
+    "data_type": "sleep",
+    "timestamp": "2025-08-10 11:38:18.273000",
+    "sleep_start_time": "2025-08-10 03:10:21.937000",
+    "sleep_end_time": "2025-08-10 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 507.93892613529323,
+      "deep_sleep_mins": 91.40415189332744,
+      "rem_sleep_mins": 114.64776964853843,
+      "light_sleep_mins": 301.8870045934274,
+      "sleep_efficiency": 0.8684829137724085,
+      "interruptions": 3
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f08",
+    "user_id": "user002",
+    "device_id": "mi_band_789",
+    "data_type": "sleep",
+    "timestamp": "2025-08-16 11:38:18.273000",
+    "sleep_start_time": "2025-08-16 04:51:51.068000",
+    "sleep_end_time": "2025-08-16 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 406.4534219708079,
+      "deep_sleep_mins": 63.80000267592109,
+      "rem_sleep_mins": 93.63761859696594,
+      "light_sleep_mins": 249.0158006979209,
+      "sleep_efficiency": 0.7841048247374584,
+      "interruptions": 3
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f09",
+    "user_id": "user002",
+    "device_id": "mi_band_789",
+    "data_type": "sleep",
+    "timestamp": "2025-08-15 11:38:18.273000",
+    "sleep_start_time": "2025-08-15 05:14:20.572000",
+    "sleep_end_time": "2025-08-15 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 383.9616786048717,
+      "deep_sleep_mins": 97.00214100320565,
+      "rem_sleep_mins": 85.24242023789321,
+      "light_sleep_mins": 201.71711736377284,
+      "sleep_efficiency": 0.7744076469689558,
+      "interruptions": 3
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f0a",
+    "user_id": "user002",
+    "device_id": "apple_watch_456",
+    "data_type": "sleep",
+    "timestamp": "2025-08-14 11:38:18.273000",
+    "sleep_start_time": "2025-08-14 04:55:48.370000",
+    "sleep_end_time": "2025-08-14 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 402.4983750124034,
+      "deep_sleep_mins": 90.27094150137789,
+      "rem_sleep_mins": 81.19174119587845,
+      "light_sleep_mins": 231.0356923151471,
+      "sleep_efficiency": 0.9318640804157564,
+      "interruptions": 2
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f0b",
+    "user_id": "user002",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-13 11:38:18.273000",
+    "sleep_start_time": "2025-08-13 03:48:57.111000",
+    "sleep_end_time": "2025-08-13 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 469.3526947261913,
+      "deep_sleep_mins": 92.34826923971357,
+      "rem_sleep_mins": 106.07530530427444,
+      "light_sleep_mins": 270.92912018220335,
+      "sleep_efficiency": 0.8593420558686559,
+      "interruptions": 2
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f0c",
+    "user_id": "user002",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-12 11:38:18.273000",
+    "sleep_start_time": "2025-08-12 05:51:33.310000",
+    "sleep_end_time": "2025-08-12 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 346.7493810017387,
+      "deep_sleep_mins": 61.62713235459429,
+      "rem_sleep_mins": 86.16001967565583,
+      "light_sleep_mins": 198.9622289714886,
+      "sleep_efficiency": 0.9050265646722229,
+      "interruptions": 0
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f0d",
+    "user_id": "user002",
+    "device_id": "apple_watch_456",
+    "data_type": "sleep",
+    "timestamp": "2025-08-11 11:38:18.273000",
+    "sleep_start_time": "2025-08-11 03:53:59.793000",
+    "sleep_end_time": "2025-08-11 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 464.3079947997246,
+      "deep_sleep_mins": 75.80936564733928,
+      "rem_sleep_mins": 97.41141945319211,
+      "light_sleep_mins": 291.0872096991932,
+      "sleep_efficiency": 0.7590454577821076,
+      "interruptions": 4
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a06daaf068e6cfb0064f0e",
+    "user_id": "user002",
+    "device_id": "mi_band_789",
+    "data_type": "sleep",
+    "timestamp": "2025-08-10 11:38:18.273000",
+    "sleep_start_time": "2025-08-10 04:28:01.347000",
+    "sleep_end_time": "2025-08-10 11:38:18.273000",
+    "values": {
+      "total_sleep_mins": 430.2820968713982,
+      "deep_sleep_mins": 85.53988706521217,
+      "rem_sleep_mins": 94.41846333497375,
+      "light_sleep_mins": 250.3237464712123,
+      "sleep_efficiency": 0.8042698063547792,
+      "interruptions": 1
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    }
+  },
+  {
+    "_id": "68a07024848fa64db178db21",
+    "user_id": "admin",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-12 19:48:52.244000",
+    "sleep_start_time": "2025-08-11 22:30:00",
+    "sleep_end_time": "2025-08-12 06:30:00",
+    "values": {
+      "total_sleep_mins": 480,
+      "deep_sleep_mins": 120.0,
+      "rem_sleep_mins": 105.6,
+      "light_sleep_mins": 254.4,
+      "sleep_efficiency": 0.92,
+      "interruptions": 1
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    },
+    "created_at": "2025-08-16 19:48:52.258000",
+    "updated_at": "2025-08-16 19:48:52.258000"
+  },
+  {
+    "_id": "68a07024848fa64db178db22",
+    "user_id": "admin",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-13 19:48:52.244000",
+    "sleep_start_time": "2025-08-13 01:30:00",
+    "sleep_end_time": "2025-08-13 06:30:00",
+    "values": {
+      "total_sleep_mins": 300,
+      "deep_sleep_mins": 60.0,
+      "rem_sleep_mins": 54.0,
+      "light_sleep_mins": 186.0,
+      "sleep_efficiency": 0.78,
+      "interruptions": 3
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    },
+    "created_at": "2025-08-16 19:48:52.259000",
+    "updated_at": "2025-08-16 19:48:52.259000"
+  },
+  {
+    "_id": "68a07024848fa64db178db23",
+    "user_id": "admin",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-14 19:48:52.244000",
+    "sleep_start_time": "2025-08-13 23:00:00",
+    "sleep_end_time": "2025-08-14 07:00:00",
+    "values": {
+      "total_sleep_mins": 480,
+      "deep_sleep_mins": 134.4,
+      "rem_sleep_mins": 115.19999999999999,
+      "light_sleep_mins": 230.40000000000003,
+      "sleep_efficiency": 0.95,
+      "interruptions": 0
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    },
+    "created_at": "2025-08-16 19:48:52.259000",
+    "updated_at": "2025-08-16 19:48:52.259000"
+  },
+  {
+    "_id": "68a07024848fa64db178db24",
+    "user_id": "admin",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-15 19:48:52.244000",
+    "sleep_start_time": "2025-08-15 02:00:00",
+    "sleep_end_time": "2025-08-15 07:30:00",
+    "values": {
+      "total_sleep_mins": 330,
+      "deep_sleep_mins": 62.7,
+      "rem_sleep_mins": 66.0,
+      "light_sleep_mins": 201.3,
+      "sleep_efficiency": 0.75,
+      "interruptions": 4
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    },
+    "created_at": "2025-08-16 19:48:52.259000",
+    "updated_at": "2025-08-16 19:48:52.259000"
+  },
+  {
+    "_id": "68a07024848fa64db178db25",
+    "user_id": "admin",
+    "device_id": "fitbit_123",
+    "data_type": "sleep",
+    "timestamp": "2025-08-16 19:48:52.244000",
+    "sleep_start_time": "2025-08-15 22:00:00",
+    "sleep_end_time": "2025-08-16 06:00:00",
+    "values": {
+      "total_sleep_mins": 480,
+      "deep_sleep_mins": 124.80000000000001,
+      "rem_sleep_mins": 110.4,
+      "light_sleep_mins": 244.79999999999998,
+      "sleep_efficiency": 0.93,
+      "interruptions": 2
+    },
+    "metadata": {
+      "sleep_tracking_mode": "auto"
+    },
+    "created_at": "2025-08-16 19:48:52.259000",
+    "updated_at": "2025-08-16 19:48:52.259000"
+  }
+]

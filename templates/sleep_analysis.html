@@ -370,7 +370,7 @@
                     <i class="fas fa-home"></i>
                     首页
                 </a>
-                <a href="/sleep_analysis" class="menu-item active">
+                <a href="/api/health/sleep-analysis/" class="menu-item active">
                     <i class="fas fa-bed"></i>
                     睡眠
                 </a>
@@ -486,40 +486,61 @@
             const userId = localStorage.getItem('user_id') || 'admin';
             
             // 获取睡眠数据
-            fetch(`/api/health/sleep-data/?user_id=${userId}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                    'Content-Type': 'application/json'
+            const fetchSleepData = () => {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    alert('请先登录系统');
+                    window.location.href = '/';
+                    return;
                 }
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('获取睡眠数据失败');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        const sleepData = data.data;
-                        
-                        // 渲染睡眠统计
-                        renderSleepStats(sleepData);
-                        
-                        // 渲染睡眠趋势图表
-                        renderSleepDurationChart(sleepData);
-                        
-                        // 渲染睡眠质量分析图表
-                        renderSleepQualityChart(sleepData);
-                        
-                        // 渲染睡眠数据表格
-                        renderSleepDataTable(sleepData);
+
+                fetch(`/api/health/sleep-data/?user_id=${userId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     }
                 })
-                .catch(error => {
-                    console.error('加载睡眠数据时出错:', error);
-                    alert('加载睡眠数据失败，请稍后再试');
-                });
+                    .then(response => {
+                        if (!response.ok) {
+                            if (response.status === 401) {
+                                // Token过期或无效，重新登录
+                                alert('登录已过期，请重新登录');
+                                localStorage.removeItem('token');
+                                localStorage.removeItem('refresh_token');
+                                localStorage.removeItem('username');
+                                window.location.href = '/';
+                                return;
+                            }
+                            throw new Error('获取睡眠数据失败');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.status === 'success') {
+                            const sleepData = data.data;
+                            
+                            // 渲染睡眠统计
+                            renderSleepStats(sleepData);
+                            
+                            // 渲染睡眠趋势图表
+                            renderSleepDurationChart(sleepData);
+                            
+                            // 渲染睡眠质量分析图表
+                            renderSleepQualityChart(sleepData);
+                            
+                            // 渲染睡眠数据表格
+                            renderSleepDataTable(sleepData);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('加载睡眠数据时出错:', error);
+                        alert('加载睡眠数据失败，请稍后再试');
+                    });
+            };
+
+            // 直接调用获取数据函数
+            fetchSleepData();
 
             // 退出登录按钮事件监听
             document.getElementById('logoutBtn').addEventListener('click', function() {

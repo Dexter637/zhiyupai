@@ -6,7 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from models import WearableData, UserProfile
 
-@login_required
 def sleep_analysis_view(request):
     """睡眠数据分析页面视图"""
     return render(request, 'sleep_analysis.html')
